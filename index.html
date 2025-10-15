@@ -68,7 +68,7 @@
             transform: translateX(-50%) translateY(-50%);
             opacity: 0.15;
             filter: blur(5px);
-            object-fit: cover; /* 确保视频铺满容器 */
+            object-fit: cover;
         }
         
         .overlay {
@@ -186,6 +186,8 @@
     </style>
 </head>
 <body>
+    
+    <audio id="bg-music" src="background-music.mp3" loop></audio>
 
     <img src="valorant-icon.png" alt="Valorant Icon" class="valorant-icon">
 
@@ -196,7 +198,7 @@
             <div class="member-layout">
                 <div class="member-info">
                     <img src="qia-avatar.png" alt="祈安头像" class="member-avatar">
-                    <h2>哨位 / SENTINEL</h2>
+                    <h2>哨位 / LEADER</h2>
                     <h1>祈安</h1>
                     <p>声音甜美，技术精湛，是团队的定海神针。她的大局观和冷静指挥，总能带领我们走向胜利。</p>
                 </div>
@@ -212,7 +214,7 @@
             <div class="member-layout reversed-layout">
                 <div class="member-info">
                     <img src="lishi-avatar.png" alt="立誓长白山.头像" class="member-avatar">
-                    <h2>决斗 / DUELIST</h2>
+                    <h2>决斗 / VICE LEADER</h2>
                     <h1>立誓长白山.</h1>
                     <p>枪法如神，无人能敌。他是战场上的神话，敌人的噩梦。有他在，我们无所畏惧，1v5是他的常规操作。</p>
                 </div>
@@ -228,7 +230,7 @@
             <div class="member-layout">
                 <div class="member-info">
                     <img src="suming-avatar.png" alt="苏铭头像" class="member-avatar">
-                    <h2>控场 / CONTROLLER</h2>
+                    <h2>控场 / TEAM EAMMEMBER</h2>
                     <h1>苏铭</h1>
                     <p>神出鬼没的幽影，玩弄敌人于股掌之间。他的传送和烟幕总能化腐朽为神奇，是团队最信赖的残局大师。</p>
                 </div>
@@ -249,6 +251,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const sections = document.querySelectorAll('.section');
             const videos = document.querySelectorAll('.background-video');
+            const bgMusic = document.getElementById('bg-music');
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -270,18 +273,23 @@
                 observer.observe(section);
             });
             
-            // 新增：解决移动端自动播放问题
-            function playAllVideos() {
+            function startMedia() {
                 videos.forEach(video => {
                     video.play().catch(error => {
                         console.log("用户交互后，尝试播放视频失败。", error);
                     });
                 });
-                // 成功播放后移除监听，避免重复执行
-                document.body.removeEventListener('touchstart', playAllVideos);
+                
+                bgMusic.play().catch(error => {
+                    console.log("用户交互后，尝试播放音乐失败。", error);
+                });
+
+                document.body.removeEventListener('touchstart', startMedia);
+                document.body.removeEventListener('click', startMedia);
             }
             
-            document.body.addEventListener('touchstart', playAllVideos, { once: true });
+            document.body.addEventListener('touchstart', startMedia, { once: true });
+            document.body.addEventListener('click', startMedia, { once: true });
         });
     </script>
 </body>
