@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>无畏契约最强小队</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;400;700&display=swap');
+        /* 字体已替换为国内快速镜像 */
+        @import url('https://fonts.loli.net/css2?family=Teko:wght@300;400;700&display=swap');
 
         :root {
             --sage-glow: #00ffcc;
@@ -55,21 +56,6 @@
             overflow: hidden;
             padding: 0 5%;
         }
-
-        .background-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -2;
-            transform: translateX(-50%) translateY(-50%);
-            opacity: 0.15;
-            filter: blur(5px);
-            object-fit: cover;
-        }
         
         .overlay {
             position: absolute;
@@ -80,10 +66,12 @@
             z-index: -1;
         }
 
-        #sage .overlay { background: radial-gradient(circle, rgba(0, 255, 204, 0.1) 0%, rgba(10, 10, 20, 1) 70%); }
-        #reyna .overlay { background: radial-gradient(circle, rgba(204, 0, 255, 0.1) 0%, rgba(10, 10, 20, 1) 70%); }
-        #omen .overlay { background: radial-gradient(circle, rgba(0, 85, 255, 0.1) 0%, rgba(10, 10, 20, 1) 70%); }
-        #join .overlay { background: radial-gradient(circle, rgba(255, 70, 85, 0.15) 0%, rgba(10, 10, 20, 1) 70%); }
+        /* 移除了视频，稍微增加了辉光效果的透明度，让背景更有层次感 */
+        #sage .overlay { background: radial-gradient(circle, rgba(0, 255, 204, 0.2) 0%, rgba(10, 10, 20, 1) 70%); }
+        #reyna .overlay { background: radial-gradient(circle, rgba(204, 0, 255, 0.2) 0%, rgba(10, 10, 20, 1) 70%); }
+        #omen .overlay { background: radial-gradient(circle, rgba(0, 85, 255, 0.2) 0%, rgba(10, 10, 20, 1) 70%); }
+        #join .overlay { background: radial-gradient(circle, rgba(255, 70, 85, 0.25) 0%, rgba(10, 10, 20, 1) 70%); }
+
 
         .member-layout {
             display: grid;
@@ -187,56 +175,52 @@
 </head>
 <body>
     
-    <audio id="bg-music" src="background-music.mp3" loop></audio>
+    <audio id="bg-music" src="https://cdn.jsdelivr.net/gh/3077Klein/wwqxzqxd/background-music.mp3" loop></audio>
 
-    <img src="valorant-icon.png" alt="Valorant Icon" class="valorant-icon">
+    <img src="https://cdn.jsdelivr.net/gh/3077Klein/wwqxzqxd/valorant-icon.png" alt="Valorant Icon" class="valorant-icon">
 
     <div class="container">
-        <!-- Members sections here... -->
         <section id="sage" class="section" style="--glow-color: var(--sage-glow);">
             <div class="overlay"></div>
-            <video class="background-video" src="sage-video.mp4" autoplay muted loop playsinline preload="auto"></video>
             <div class="member-layout">
                 <div class="member-info">
-                    <img src="qia-avatar.png" alt="祈安头像" class="member-avatar">
+                    <img src="https://cdn.jsdelivr.net/gh/3077Klein/wwqxzqxd/qia-avatar.png" alt="祈安头像" class="member-avatar">
                     <h2>哨位 / SENTINEL</h2>
                     <h1>祈安</h1>
                     <p>声音甜美，技术精湛，是团队的定海神针。她的大局观和冷静指挥，总能带领我们走向胜利。</p>
                 </div>
                 <div class="hero-image-container">
-                    <img src="sage.png" alt="贤者" class="hero-image">
+                    <img src="https://cdn.jsdelivr.net/gh/3077Klein/wwqxzqxd/sage.png" alt="贤者" class="hero-image">
                 </div>
             </div>
         </section>
 
         <section id="reyna" class="section" style="--glow-color: var(--reyna-glow);">
             <div class="overlay"></div>
-            <video class="background-video" src="reyna-video.mp4" autoplay muted loop playsinline preload="auto"></video>
             <div class="member-layout reversed-layout">
                 <div class="member-info">
-                    <img src="lishi-avatar.png" alt="立誓长白山.头像" class="member-avatar">
+                    <img src="https://cdn.jsdelivr.net/gh/3077Klein/wwqxzqxd/lishi-avatar.png" alt="立誓长白山.头像" class="member-avatar">
                     <h2>决斗 / DUELIST</h2>
                     <h1>立誓长白山.</h1>
                     <p>枪法如神，无人能敌。他是战场上的神话，敌人的噩梦。有他在，我们无所畏惧，1v5是他的常规操作。</p>
                 </div>
                 <div class="hero-image-container">
-                    <img src="reyna.png" alt="芮娜" class="hero-image">
+                    <img src="https://cdn.jsdelivr.net/gh/3077Klein/wwqxzqxd/reyna.png" alt="芮娜" class="hero-image">
                 </div>
             </div>
         </section>
 
         <section id="omen" class="section" style="--glow-color: var(--omen-glow);">
             <div class="overlay"></div>
-            <video class="background-video" src="omen-video.mp4" autoplay muted loop playsinline preload="auto"></video>
             <div class="member-layout">
                 <div class="member-info">
-                    <img src="suming-avatar.png" alt="苏铭头像" class="member-avatar">
+                    <img src="https://cdn.jsdelivr.net/gh/3077Klein/wwqxzqxd/suming-avatar.png" alt="苏铭头像" class="member-avatar">
                     <h2>控场 / CONTROLLER</h2>
                     <h1>苏铭</h1>
                     <p>神出鬼没的幽影，玩弄敌人于股掌之间。他的传送和烟幕总能化腐朽为神奇，是团队最信赖的残局大师。</p>
                 </div>
                 <div class="hero-image-container">
-                    <img src="omen.png" alt="幽影" class="hero-image">
+                    <img src="https://cdn.jsdelivr.net/gh/3077Klein/wwqxzqxd/omen.png" alt="幽影" class="hero-image">
                 </div>
             </div>
         </section>
@@ -251,19 +235,13 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const sections = document.querySelectorAll('.section');
-            const videos = document.querySelectorAll('.background-video');
             const bgMusic = document.getElementById('bg-music');
 
+            // IntersectionObserver 仅用于触发入场动画，与媒体播放无关
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        const video = entry.target.querySelector('video');
-                        if (video && !video.paused) {
-                           // Video is already playing, do nothing
-                        } else if(video) {
-                           video.play().catch(()=>{});
-                        }
                     } else {
                         entry.target.classList.remove('active');
                     }
@@ -274,30 +252,17 @@
                 observer.observe(section);
             });
             
-            // --- 这是修改的核心部分 ---
+            // 媒体播放函数，现在只处理音乐
             function startMediaPlayback() {
-                console.log("用户交互发生！尝试播放媒体。");
-                
-                // 播放所有静音视频
-                videos.forEach(video => {
-                    video.play().catch(()=>{});
-                });
-
-                // 明确地请求播放背景音乐，并处理返回的Promise
                 const audioPromise = bgMusic.play();
-
                 if (audioPromise !== undefined) {
-                    audioPromise.then(_ => {
-                        // 播放成功！
-                        console.log("背景音乐播放成功！");
-                    }).catch(error => {
-                        // 播放被阻止
+                    audioPromise.catch(error => {
                         console.error("背景音乐播放失败:", error);
                     });
                 }
             }
             
-            // 添加一次性事件监听器，确保只触发一次
+            // 添加一次性事件监听器，确保只在第一次用户交互时触发
             document.body.addEventListener('click', startMediaPlayback, { once: true });
             document.body.addEventListener('touchstart', startMediaPlayback, { once: true });
         });
