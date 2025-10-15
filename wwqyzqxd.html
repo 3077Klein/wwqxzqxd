@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>无畏契约最强小队</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;400;700&display=swap');
+
+        :root {
+            --sage-glow: #00ffcc;
+            --reyna-glow: #cc00ff;
+            --omen-glow: #0055ff;
+            --text-color: #f0f0f0;
+            --bg-color: #0a0a14;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Teko', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .valorant-icon {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            z-index: 1000;
+            opacity: 0.8;
+        }
+
+        .container {
+            height: 100vh;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+
+        .section {
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0 5%;
+        }
+
+        .background-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2;
+            transform: translateX(-50%) translateY(-50%);
+            opacity: 0.15;
+            filter: blur(5px);
+            object-fit: cover; /* 确保视频铺满容器 */
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        #sage .overlay { background: radial-gradient(circle, rgba(0, 255, 204, 0.1) 0%, rgba(10, 10, 20, 1) 70%); }
+        #reyna .overlay { background: radial-gradient(circle, rgba(204, 0, 255, 0.1) 0%, rgba(10, 10, 20, 1) 70%); }
+        #omen .overlay { background: radial-gradient(circle, rgba(0, 85, 255, 0.1) 0%, rgba(10, 10, 20, 1) 70%); }
+        #join .overlay { background: radial-gradient(circle, rgba(255, 70, 85, 0.15) 0%, rgba(10, 10, 20, 1) 70%); }
+
+        .member-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            gap: 20px;
+        }
+        
+        .member-info { text-align: left; z-index: 2; }
+        
+        .hero-image-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .hero-image {
+            max-width: 90%;
+            height: auto;
+            max-height: 80vh;
+            filter: drop-shadow(0px 0px 30px var(--glow-color));
+            transform: translateZ(50px) scale(1.1);
+        }
+        
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid var(--glow-color);
+            box-shadow: 0 0 20px var(--glow-color);
+            margin-bottom: 20px;
+        }
+        
+        .member-info h1 {
+            font-size: 6rem;
+            font-weight: 700;
+            line-height: 1;
+            text-transform: uppercase;
+            color: var(--glow-color);
+            text-shadow: 0 0 15px var(--glow-color);
+        }
+
+        .member-info h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .member-info p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 400px;
+        }
+        
+        .reversed-layout { grid-template-columns: 1fr 1fr; }
+        .reversed-layout .member-info { grid-column: 2; text-align: right; }
+        .reversed-layout .hero-image-container { grid-column: 1; }
+        .reversed-layout .member-info { display: flex; flex-direction: column; align-items: flex-end; }
+
+        #join { text-align: center; flex-direction: column; }
+        #join h1 {
+            font-size: 7rem;
+            font-weight: 700;
+            color: #FD4556;
+            text-shadow: 0 0 25px #FD4556;
+            margin-bottom: 20px;
+        }
+        #join p { font-size: 2rem; letter-spacing: 5px; }
+
+        .section .member-info h1, .section .member-info h2, .section .member-info p, .section .member-avatar, .section .hero-image {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .section.active .member-info h1 { transition-delay: 0.2s; }
+        .section.active .member-info h2 { transition-delay: 0.4s; }
+        .section.active .member-avatar { transition-delay: 0.6s; }
+        .section.active .member-info p { transition-delay: 0.8s; }
+        .section.active .hero-image { transition-delay: 0.1s; }
+        .section.active .member-info h1, .section.active .member-info h2, .section.active .member-info p, .section.active .member-avatar, .section.active .hero-image {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .member-layout, .reversed-layout { grid-template-columns: 1fr; text-align: center; }
+            .reversed-layout .member-info, .member-info { grid-row: 2; grid-column: 1; text-align: center; align-items: center; }
+            .reversed-layout .hero-image-container, .hero-image-container { grid-row: 1; grid-column: 1; }
+            .hero-image { max-height: 45vh; }
+            .member-info h1 { font-size: 4rem; }
+            #join h1 { font-size: 4.5rem; }
+            .member-info h2 { font-size: 1.5rem; }
+            .member-info p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <img src="valorant-icon.png" alt="Valorant Icon" class="valorant-icon">
+
+    <div class="container">
+        <section id="sage" class="section" style="--glow-color: var(--sage-glow);">
+            <div class="overlay"></div>
+            <video class="background-video" src="sage-video.mp4" autoplay muted loop playsinline preload="auto"></video>
+            <div class="member-layout">
+                <div class="member-info">
+                    <img src="qia-avatar.png" alt="祈安头像" class="member-avatar">
+                    <h2>哨位 / SENTINEL</h2>
+                    <h1>祈安</h1>
+                    <p>声音甜美，技术精湛，是团队的定海神针。她的大局观和冷静指挥，总能带领我们走向胜利。</p>
+                </div>
+                <div class="hero-image-container">
+                    <img src="sage.png" alt="贤者" class="hero-image">
+                </div>
+            </div>
+        </section>
+
+        <section id="reyna" class="section" style="--glow-color: var(--reyna-glow);">
+            <div class="overlay"></div>
+            <video class="background-video" src="reyna-video.mp4" autoplay muted loop playsinline preload="auto"></video>
+            <div class="member-layout reversed-layout">
+                <div class="member-info">
+                    <img src="lishi-avatar.png" alt="立誓长白山.头像" class="member-avatar">
+                    <h2>决斗 / DUELIST</h2>
+                    <h1>立誓长白山.</h1>
+                    <p>枪法如神，无人能敌。他是战场上的神话，敌人的噩梦。有他在，我们无所畏惧，1v5是他的常规操作。</p>
+                </div>
+                <div class="hero-image-container">
+                    <img src="reyna.png" alt="芮娜" class="hero-image">
+                </div>
+            </div>
+        </section>
+
+        <section id="omen" class="section" style="--glow-color: var(--omen-glow);">
+            <div class="overlay"></div>
+            <video class="background-video" src="omen-video.mp4" autoplay muted loop playsinline preload="auto"></video>
+            <div class="member-layout">
+                <div class="member-info">
+                    <img src="suming-avatar.png" alt="苏铭头像" class="member-avatar">
+                    <h2>控场 / CONTROLLER</h2>
+                    <h1>苏铭</h1>
+                    <p>神出鬼没的幽影，玩弄敌人于股掌之间。他的传送和烟幕总能化腐朽为神奇，是团队最信赖的残局大师。</p>
+                </div>
+                <div class="hero-image-container">
+                    <img src="omen.png" alt="幽影" class="hero-image">
+                </div>
+            </div>
+        </section>
+        
+        <section id="join" class="section">
+            <div class="overlay"></div>
+            <h1>VALORANT</h1>
+            <p>无畏契约最强小队<br>欢迎你的加入</p>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section');
+            const videos = document.querySelectorAll('.background-video');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        const video = entry.target.querySelector('video');
+                        if (video) {
+                           video.play().catch(error => {
+                               console.log("视频自动播放失败，等待用户交互。", error);
+                           });
+                        }
+                    } else {
+                        entry.target.classList.remove('active');
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // 新增：解决移动端自动播放问题
+            function playAllVideos() {
+                videos.forEach(video => {
+                    video.play().catch(error => {
+                        console.log("用户交互后，尝试播放视频失败。", error);
+                    });
+                });
+                // 成功播放后移除监听，避免重复执行
+                document.body.removeEventListener('touchstart', playAllVideos);
+            }
+            
+            document.body.addEventListener('touchstart', playAllVideos, { once: true });
+        });
+    </script>
+</body>
+</html>
