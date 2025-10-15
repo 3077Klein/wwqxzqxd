@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>无畏契约最强小队</title>
     <style>
-        /* 字体已替换为国内快速镜像 */
+    
         @import url('https://fonts.loli.net/css2?family=Teko:wght@300;400;700&display=swap');
 
         :root {
@@ -66,7 +66,6 @@
             z-index: -1;
         }
 
-        /* 移除了视频，稍微增加了辉光效果的透明度，让背景更有层次感 */
         #sage .overlay { background: radial-gradient(circle, rgba(0, 255, 204, 0.2) 0%, rgba(10, 10, 20, 1) 70%); }
         #reyna .overlay { background: radial-gradient(circle, rgba(204, 0, 255, 0.2) 0%, rgba(10, 10, 20, 1) 70%); }
         #omen .overlay { background: radial-gradient(circle, rgba(0, 85, 255, 0.2) 0%, rgba(10, 10, 20, 1) 70%); }
@@ -185,7 +184,7 @@
             <div class="member-layout">
                 <div class="member-info">
                     <img src="https://cdn.jsdelivr.net/gh/3077Klein/wwqxzqxd/qia-avatar.png" alt="祈安头像" class="member-avatar">
-                    <h2>哨位 / SENTINEL</h2>
+                    <h2>哨位 / LEADER</h2>
                     <h1>祈安</h1>
                     <p>声音甜美，技术精湛，是团队的定海神针。她的大局观和冷静指挥，总能带领我们走向胜利。</p>
                 </div>
@@ -200,9 +199,9 @@
             <div class="member-layout reversed-layout">
                 <div class="member-info">
                     <img src="https://cdn.jsdelivr.net/gh/3077Klein/wwqxzqxd/lishi-avatar.png" alt="立誓长白山.头像" class="member-avatar">
-                    <h2>决斗 / DUELIST</h2>
+                    <h2>决斗 / DEPUTY LEADER</h2>
                     <h1>立誓长白山.</h1>
-                    <p>枪法如神，无人能敌。他是战场上的神话，敌人的噩梦。有他在，我们无所畏惧，1v5是他的常规操作。</p>
+                    <p>枪法如神，无人能敌。他是战场上的神话，敌人的噩梦。有他在，我们无所畏惧，1V9是他的常规操作。</p>
                 </div>
                 <div class="hero-image-container">
                     <img src="https://cdn.jsdelivr.net/gh/3077Klein/wwqxzqxd/reyna.png" alt="芮娜" class="hero-image">
@@ -215,7 +214,7 @@
             <div class="member-layout">
                 <div class="member-info">
                     <img src="https://cdn.jsdelivr.net/gh/3077Klein/wwqxzqxd/suming-avatar.png" alt="苏铭头像" class="member-avatar">
-                    <h2>控场 / CONTROLLER</h2>
+                    <h2>控场 / TEAMMATE</h2>
                     <h1>苏铭</h1>
                     <p>神出鬼没的幽影，玩弄敌人于股掌之间。他的传送和烟幕总能化腐朽为神奇，是团队最信赖的残局大师。</p>
                 </div>
@@ -237,7 +236,6 @@
             const sections = document.querySelectorAll('.section');
             const bgMusic = document.getElementById('bg-music');
 
-            // IntersectionObserver 仅用于触发入场动画，与媒体播放无关
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -252,7 +250,6 @@
                 observer.observe(section);
             });
             
-            // 媒体播放函数，现在只处理音乐
             function startMediaPlayback() {
                 const audioPromise = bgMusic.play();
                 if (audioPromise !== undefined) {
@@ -262,7 +259,6 @@
                 }
             }
             
-            // 添加一次性事件监听器，确保只在第一次用户交互时触发
             document.body.addEventListener('click', startMediaPlayback, { once: true });
             document.body.addEventListener('touchstart', startMediaPlayback, { once: true });
         });
